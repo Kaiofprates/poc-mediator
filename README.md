@@ -78,26 +78,31 @@ resilience4j:
 - **enableExponentialBackoff**: ativado para aumentar o tempo de espera
 - **exponentialBackoffMultiplier**: multiplicador de 2 para o backoff exponencial
 
-## Testes
+## Infraestrutura Local
 
-A POC inclui testes unitários e de integração:
+A POC utiliza LocalStack para simular serviços AWS localmente. Os scripts de infraestrutura estão disponíveis na pasta `infra-local`:
 
-### Testes Unitários
-- `PedidoCriadoEventListenerTest`: testa o comportamento do listener
-  - Testa processamento com sucesso
-  - Testa comportamento do retry em caso de falha
+### Scripts Disponíveis
 
-### Testes de Integração
-- `PedidoCriadoEventListenerIntegrationTest`: testa a integração com Spring e Resilience4j
-  - Verifica se o retry está funcionando corretamente
-  - Confirma que o contador de execuções está correto
+- `list_queue.sh`: Lista todas as filas SQS disponíveis
+- `read_dlq.sh`: Lê as mensagens presentes na DLQ (Dead Letter Queue)
+
+### Como Usar os Scripts
+
+1. Certifique-se de que o LocalStack está rodando
+2. Execute os scripts conforme necessário:
+```bash
+./infra-local/list_queue.sh
+./infra-local/read_dlq.sh
+```
 
 ## Como Executar
 
 1. Clone o repositório
-2. Execute os testes:
+2. Inicie o LocalStack
+3. Execute a aplicação:
 ```bash
-./mvnw test
+./mvnw spring-boot:run
 ```
 
 ## Tecnologias Utilizadas
@@ -106,8 +111,7 @@ A POC inclui testes unitários e de integração:
 - Spring Boot
 - Spring Events
 - Resilience4j
-- JUnit 5
-- Mockito
+- AWS SQS (simulado com LocalStack)
 
 ## Benefícios da Implementação
 
