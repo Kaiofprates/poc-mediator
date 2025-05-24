@@ -12,7 +12,7 @@ import java.io.IOException;
 @Component
 public class NotificacaoListener extends BaseRetryListener<PedidoCriadoEvent> {
 
-    @Value("${simular.erro.notificacao:true}")
+    @Value("${simular.erro.notificacao:false}")
     private boolean simularErro;
 
     @EventListener

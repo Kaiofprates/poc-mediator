@@ -20,10 +20,7 @@ public abstract class BaseRetryListener<T extends ApplicationEvent> {
             .onRetry(event -> log.info("Tentativa {} de {} para {}", 
                 event.getNumberOfRetryAttempts(), 
                 retry.getRetryConfig().getMaxAttempts(),
-                retryName))
-            .onError(event -> log.error("Erro após {} tentativas: {}", 
-                event.getNumberOfRetryAttempts(),
-                event.getLastThrowable().getMessage()));
+                retryName));
 
         try {
             retry.executeRunnable(action);
