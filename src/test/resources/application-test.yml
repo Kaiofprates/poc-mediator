@@ -1,0 +1,8 @@
+resilience4j:
+  retry:
+    instances:
+      pedidoListener:
+        maxAttempts: 3
+        waitDuration: 1s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2 
